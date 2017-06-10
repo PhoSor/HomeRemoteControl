@@ -6,14 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace WebLabTestTask;
+namespace HomeRemoteControl;
 
 /**
- * Description of NoCommand
  *
  * @author User
  */
-class NoCommand implements Command {
-    public function execute() {}
-    public function undo() {}
+interface Command {
+    public function execute();
+    public function undo();
 }

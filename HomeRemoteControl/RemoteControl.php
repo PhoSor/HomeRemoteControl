@@ -1,6 +1,6 @@
 <?php
 
-namespace WebLabTestTask;
+namespace HomeRemoteControl;
 
 /**
  * Description of RemoteControl

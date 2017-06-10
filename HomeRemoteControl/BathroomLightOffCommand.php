@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace WebLabTestTask;
+namespace HomeRemoteControl;
 
 /**
  * Description of BathroomLightOnCommand
  *
  * @author User
  */
-class BathroomLightOnCommand implements Command {
+class BathroomLightOffCommand implements Command {
     private $bathroomLight;
     
     function __construct(BathroomLight $bathroomLight) {
@@ -21,10 +21,10 @@ class BathroomLightOnCommand implements Command {
     }
     
     public function execute() {
-        $this->bathroomLight->on();
+        $this->bathroomLight->off();
     }
     
     public function undo() {
-        $this->bathroomLight->off();
+        $this->bathroomLight->on();
     }
 }

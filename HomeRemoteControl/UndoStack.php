@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace WebLabTestTask;
+namespace HomeRemoteControl;
 
 /**
  * Description of UndoStack
