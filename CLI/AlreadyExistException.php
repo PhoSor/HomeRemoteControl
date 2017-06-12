@@ -6,14 +6,11 @@
  * and open the template in the editor.
  */
 
-namespace HomeRemoteControl;
+namespace CLI;
 
 /**
- * Description of NoCommand
+ * Description of AlreadyExistException
  *
  * @author User
  */
-class NoCommand implements Command {
-    public function execute() {}
-    public function undo() {}
-}
+class AlreadyExistException extends \RuntimeException {}

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace HomeRemoteControl;
+namespace RemoteDevices;
 
 /**
  * Description of BathroomLightOnCommand

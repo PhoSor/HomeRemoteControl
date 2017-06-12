@@ -6,13 +6,15 @@
  * and open the template in the editor.
  */
 
-namespace HomeRemoteControl;
+namespace CLI;
 
 /**
  *
  * @author User
  */
-interface Command {
-    public function execute();
-    public function undo();
+interface CLIHandler {
+    public function perform($options);
+    public function getName();
+    public function getShortOpt();
+    public function getLongOpt();
 }

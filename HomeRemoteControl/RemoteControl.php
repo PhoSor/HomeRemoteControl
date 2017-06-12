@@ -2,6 +2,9 @@
 
 namespace HomeRemoteControl;
 
+use RemoteDevices\NoCommand;
+use RemoteDevices\Command;
+
 /**
  * Description of RemoteControl
  *

@@ -6,19 +6,19 @@
  * and open the template in the editor.
  */
 
-namespace HomeRemoteControl;
+namespace RemoteDevices;
 
 /**
- * Description of BathroomLight
+ * Description of Kettle
  *
  * @author User
  */
-class BathroomLight {
+class Kettle {
     public function on(): void {
-        echo "Bathroom Light On\n";
+        echo "Kettle On\n";
     }
     
     public function off(): void {
-        echo "Bathroom Light Off\n";
+        echo "Kettle Off\n";
     }
 }
