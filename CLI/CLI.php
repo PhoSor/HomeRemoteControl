@@ -26,18 +26,22 @@ class CLI {
         $this->options = [];
     }
     
-    public function cmd(CLIHandler $handler) {
+    public function command(CLIHandler $handler) {
         $name = $handler->getName();
         $shortopt = $handler->getShortOpt();
         $longopt = $handler->getLongOpt();
         
         if (in_array($name, $this->cmdNames)) {
             throw new AlreadyExistException;
-        } else { $this->cmdNames[$name] = $handler; }
+        } else {
+            $this->cmdNames[$name] = $handler;
+        }
         
         if (in_array($longopt, $this->longopts)) {
             throw new AlreadyExistException;
-        } else { $this->longopts[] = $longopt; }
+        } else {
+            $this->longopts[] = $longopt;
+        }
         
         $this->shortopt .= $shortopt;
     }
@@ -47,16 +51,22 @@ class CLI {
     }
     
     public function perform() {
-        reset($this->options);
+        // reset($this->options);
         $name = key($this->options);
+        
         if ($name) {
             var_dump($name);
             $this->cmdNames[$name]->perform($this->options);            
-        } else { $this->usage(); }
+        } else {
+            $this->usage(); 
+        }
     }
     
     public function usage($usage = NULL) {
-        if ($usage) { $this->usage = $usage; }
-        else { echo $this->usage; }
+        if ($usage) {
+            $this->usage = $usage;
+        } else {
+            echo $this->usage;            
+        }
     }
 }

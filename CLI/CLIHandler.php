@@ -12,9 +12,33 @@ namespace CLI;
  *
  * @author User
  */
-interface CLIHandler {
-    public function perform($options);
-    public function getName();
-    public function getShortOpt();
-    public function getLongOpt();
+class CLIHandler {
+    private $name;
+    private $shortopt;
+    private $longopt;
+    private $cliCommand;
+            
+    function __construct($name, $shortopt, $longopt, $cliCommand) {
+        $this->name = $name;
+        $this->shortopt = $shortopt;
+        $this->longopt = $longopt;
+        $this->cliCommand = $cliCommand;
+    }
+    
+    public function perform($options) {
+        var_dump($options);
+        $this->cliCommand->perform($options);
+    }
+    
+    public function getName() {
+        return $this->name;
+    }
+    
+    public function getShortOpt() {
+        return $this->shortopt;
+    }
+    
+    public function getLongOpt() {
+        return $this->longopt;
+    }
 }

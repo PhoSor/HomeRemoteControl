@@ -6,19 +6,12 @@
  * and open the template in the editor.
  */
 
-namespace RemoteDevices;
+namespace CLI;
 
 /**
- * Description of Garage
  *
  * @author User
  */
-class Garage {
-    public function open(): void {
-        echo "Garage Open\n";
-    }
-    
-    public function close(): void {
-        echo "Garage Close\n";
-    }
+interface CLICommand {
+    public function perform($options);
 }

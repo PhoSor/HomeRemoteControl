@@ -13,7 +13,7 @@ namespace CLI;
  *
  * @author User
  */
-class PrintCLIHandler implements CLIHandler {
+class PrintCLICommand implements CLICommand {
     private $remoteControl;
     private $devices;
             
@@ -23,8 +23,6 @@ class PrintCLIHandler implements CLIHandler {
     }
     
     public function perform($options) {
-       var_dump($options);
-        
         switch ($options['print']) {
             case 'buttons':
                 $this->remoteControl->printCommands();
@@ -35,17 +33,5 @@ class PrintCLIHandler implements CLIHandler {
             default:
                 throw new \InvalidArgumentException;
         }
-    }
-    
-    public function getName() {
-        return "print";
-    }
-    
-    public function getShortOpt() {
-        return "";
-    }
-    
-    public function getLongOpt() {
-        return "print:";
     }
 }

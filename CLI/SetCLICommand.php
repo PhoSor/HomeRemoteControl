@@ -13,7 +13,7 @@ namespace CLI;
  *
  * @author User
  */
-class SetCLIHandler implements CLIHandler {
+class SetCLICommand implements CLICommand {
     private $remoteControl;
     private $devices;
             
@@ -23,26 +23,12 @@ class SetCLIHandler implements CLIHandler {
     }
     
     public function perform($options) {
-        var_dump($options);
         $position = intval($options['p']);
         $deviceName = $options['d'];
         $device = $this->devices[$deviceName];
-        //var_dump($device);
         
         if (is_int($position) && $device) {
             $this->remoteControl->set($position, $device->getOn(), $device->getOff());
         }
-    }
-    
-    public function getName() {
-        return "set";
-    }
-    
-    public function getShortOpt() {
-        return "p:d:";
-    }
-    
-    public function getLongOpt() {
-        return "set";
     }
 }

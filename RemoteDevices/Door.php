@@ -13,12 +13,12 @@ namespace RemoteDevices;
  *
  * @author User
  */
-class Garage {
+class Door {
     public function open(): void {
-        echo "Garage Open\n";
+        echo "Door Open\n";
     }
     
     public function close(): void {
-        echo "Garage Close\n";
+        echo "Door Close\n";
     }
 }

@@ -15,13 +15,13 @@ namespace RemoteDevices;
  */
 class Device {
     protected $name;
-    protected $onCmd;
-    protected $offCmd;
+    protected $onCommand;
+    protected $offCommand;
     
-    public function __construct($name, $onCmd, $offCmd) {
+    public function __construct($name, $onCommand, $offCommand) {
         $this->name = $name;
-        $this->onCmd = $onCmd;
-        $this->offCmd = $offCmd;
+        $this->onCommand = $onCommand;
+        $this->offCommand = $offCommand;
     }
     
     public function getName() {
@@ -29,10 +29,10 @@ class Device {
     }
     
     public function getOn() {
-        return $this->onCmd;
+        return $this->onCommand;
     }
     
     public function getOff() {
-        return $this->offCmd;
+        return $this->offCommand;
     }
 }

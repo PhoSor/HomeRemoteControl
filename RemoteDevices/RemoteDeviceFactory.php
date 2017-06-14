@@ -14,30 +14,15 @@ namespace RemoteDevices;
  * @author User
  */
 class RemoteDeviceFactory {
-    public static function create($name) {
-        $device = null;
-        $remoteDevice = null;
-        $onCmd = null;
-        $offCmd = null;
+    public static function create($vendorDeviceName) {
+        $onCommandClassName = $vendorDeviceName . 'OnCommand';
+        $offCommandClassName = $vendorDeviceName . 'OffCommand';
         
-        switch ($name) {
-            case 'BathroomLight':
-                $remoteDevice = new BathroomLight();
-                $onCmd = new BathroomLightOnCommand($remoteDevice);
-                $offCmd = new BathroomLightOffCommand($remoteDevice);
-                $device = 
-                    new BathroomLightDevice($name, $onCmd, $offCmd);
-                break;
-            case 'Garage':
-                $remoteDevice = new Garage();
-                $onCmd = new GarageOnCommand($remoteDevice);
-                $offCmd = new GarageOffCommand($remoteDevice);
-                $device = 
-                    new GarageDevice($name, $onCmd, $offCmd);
-                break;
-            default:
-                break;
-        }
+        $vendorDevice = new $vendorDeviceName();
+        $onCommand = new $onCommandClassName($vendorDevice);
+        $offCommand = new $offCommandClassName($vendorDevice);
+        
+        $device = new Device($vendorDevice, $onCommand, $offCommand);
         
         return $device;
     }

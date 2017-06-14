@@ -1,8 +1,6 @@
 <?php
 
-use CLI\CLI;
 use HomeRemoteControl\RemoteControl;
-use RemoteDevices\RemoteDeviceFactory;
 
 spl_autoload_register(function($classname) {
     $ds = DIRECTORY_SEPARATOR;
@@ -15,33 +13,41 @@ spl_autoload_register(function($classname) {
     if (is_readable($file)) { require_once $file; }
 });
 
-/*
-$control->undo();
-$control->performOff(0);
-$control->performOn(0);
-$control->performOn(0);
-$control->undo();
-$control->undo();
-$control->undo(); */
-/* 
-$devices = [
-    RemoteDevicesFactory::create('BathroomLight'),
-    RemoteDevicesFactory::create('Garage'),
-]; */
 
-$devices = [];
-$devices['BathroomLight'] = RemoteDeviceFactory::create('BathroomLight');
-$devices['Garage'] = RemoteDeviceFactory::create('Garage');
+$vendorDeviceNames = [
+    'BathroomLight',
+    'Jacuzzi',
+    'Heating',
+    'Garage',
+    'Door',
+    'Jalousie',
+    'Kettle',
+];
+
+$vendorDeviceFullNames = array_map(function($name) {
+    return 'RemoteDevices\\' . $name;
+}, $vendorDeviceNames);
+
+$devices = array_map('RemoteDevices\RemoteDeviceFactory::create', $vendorDeviceFullNames);
 
 $control = RemoteControl::getInstance();
 
-$cli = new CLI();
+$cli = new \CLI\CLI();
 
-$cli->cmd(new \CLI\PrintCLIHandler($control, $devices));
-$cli->cmd(new \CLI\SetCLIHandler($control, $devices));
-//$cli->cmd('on', new CLI\OnCLIHandler());
-//$cli->cmd('off', new CLI\OffCLIHandler());
-//$cli->cmd('undo', new CLI\UndoCLIHandler());
+$printHandler = new \CLI\CLIHandler('print', '', 'print:',
+        new \CLI\PrintCLICommand($control, $devices));
+$setHandler = new \CLI\CLIHandler('set', 'p:d:', 'set',
+        new \CLI\SetCLICommand($control, $devices));
+
+$onHandler = new \CLI\CLIHandler('on', 'p:', 'on', new \CLI\OnCLICommand($control));
+$offHandler = new \CLI\CLIHandler('off', 'p:', 'off', new \CLI\OffCLICommand($control));
+$undoHandler = new \CLI\CLIHandler('undo', '', 'undo', new \CLI\UndoCLICommand($control));
+
+$cli->command($printHandler);
+$cli->command($setHandler);
+$cli->command($onHandler);
+$cli->command($offHandler);
+$cli->command($undoHandler);
 
 $usage = "usage: php homecontrol.php --print (buttons | devices)
        php homecontrol.php --set (-p <num> -d <name>)
